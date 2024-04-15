@@ -1,6 +1,5 @@
-import SkyHighBuilding from './6-sky_high';
+import Airport from './7-airpot';
 
-const building = new SkyHighBuilding(140, 60);
-console.log(building.sqft);
-console.log(building.floors);
-console.log(building.evacuationWarningMessage());
+const airportSF = new Airport('San Francisco Airport', 'SFO');
+console.log(airportSF);
+console.log(airportSF.toString());
