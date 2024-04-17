@@ -1,4 +1,4 @@
-/**
+/*
  *  Representing a class room
  */
 export default class ClassRoom {
