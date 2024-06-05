@@ -38,10 +38,7 @@ const countStudents = (dataPath) =>
         studentGroup[field].push(Object.fromEntries(studentEntries));
       }
 
-      const totalStudents = Object.values(studentGroup).reduce(
-        (sum, group) => sum + group.length,
-        0,
-      );
+      const totalStudents = Object.values(studentGroup).reduce((sum, group) => sum + group.length, 0);
       let result = `Number of students: ${totalStudents}`;
       for (const [field, group] of Object.entries(studentGroup)) {
         const studentNames = group.map((student) => student.firstname).join(', ');
