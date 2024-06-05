@@ -7,12 +7,18 @@ const fs = require('fs');
 const countStudents = (dataPath) => {
   let data;
   try {
-    data = fs.readFileSync(dataPath, 'utf-8');
+    data = fs.readFileSync(dataPath, 'utf8');
   } catch (err) {
-    throw new Error('cannot load the database');
+    throw new Error('Cannot load the database');
   }
 
-  const fileLines = data.trim().split('\n');
+  const fileLines = data
+    .trim()
+    .split('\n')
+    .filter((line) => line.trim() !== '');
+  if (fileLines.length <= 1) {
+    return;
+  }
 
   const studentGroups = {};
   const dbFields = fileLines[0].split(',');
@@ -22,7 +28,6 @@ const countStudents = (dataPath) => {
     const studentRecord = line.split(',');
     const studentValues = studentRecord.slice(0, studentRecord.length - 1);
     const field = studentRecord[studentRecord.length - 1];
-
     if (!Object.keys(studentGroups).includes(field)) {
       studentGroups[field] = [];
     }
@@ -33,6 +38,7 @@ const countStudents = (dataPath) => {
     ]);
     studentGroups[field].push(Object.fromEntries(studentEntries));
   }
+
   const totalStudents = Object.values(studentGroups).reduce(
     (sum, group) => sum + group.length,
     0,
@@ -41,7 +47,7 @@ const countStudents = (dataPath) => {
   for (const [field, group] of Object.entries(studentGroups)) {
     const studentNames = group.map((student) => student.firstname).join(', ');
     console.log(
-      `Number of students in ${field}: ${group.length}. List ${studentNames}`,
+      `Number of students in ${field}: ${group.length}. List: ${studentNames}`,
     );
   }
 };
