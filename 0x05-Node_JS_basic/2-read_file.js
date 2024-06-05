@@ -5,13 +5,14 @@ const fs = require('fs');
  */
 
 const countStudents = (dataPath) => {
+  let data;
   try {
-    fs.readFileSync(dataPath, 'utf8');
+    data = fs.readFileSync(dataPath, 'utf-8');
   } catch (err) {
     throw new Error('cannot load the database');
   }
 
-  const fileLines = fs.readFileSync(dataPath, 'utf8').trim().split('\n');
+  const fileLines = data.trim().split('\n');
 
   const studentGroups = {};
   const dbFields = fileLines[0].split(',');
