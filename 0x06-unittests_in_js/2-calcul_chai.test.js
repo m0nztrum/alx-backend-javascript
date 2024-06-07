@@ -47,5 +47,8 @@ describe('calculateNumber', () => {
     it('should round 2.4 and 0 and return Error', () => {
       expect(calculateNumber('DIVIDE', 2.4, 0)).to.equal('Error');
     });
+    it('should round 0 and 0 and return Error', () => {
+      expect(calculateNumber('DIVIDE', 0, 0)).to.equal('Error');
+    });
   });
 });
